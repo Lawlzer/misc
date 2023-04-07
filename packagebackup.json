@@ -6,13 +6,8 @@
 	"author": "Lawlzer",
 	"main": "./src/index.js",
 	"types": "./src/index.d.ts",
-	"files": [
-		"src",
-		"dist"
-	],
-	"workspaces": [
-		"packages/**"
-	],
+	"files": ["src", "dist"],
+	"workspaces": ["packages/*"],
 	"scripts": {
 		"clean": "rimraf ./dist",
 		"postinstall": "lerna bootstrap",
@@ -35,12 +30,21 @@
 	"devDependencies": {
 		"@lawlzer/utils": "^3.2.19",
 		"@sucrase/jest-plugin": "^3.0.0",
+		"@types/eslint": "^8.37.0",
 		"@types/jest": "^29.5.0",
 		"@types/node": "^18.15.11",
+		"@typescript-eslint/eslint-plugin": "^5.57.1",
+		"@typescript-eslint/parser": "^5.57.1",
 		"cross-env": "^7.0.3",
+		"eslint": "^8.37.0",
+		"eslint-plugin-import": "^2.27.5",
+		"eslint-plugin-simple-import-sort": "^10.0.0",
+		"eslint-plugin-unused-imports": "^2.0.0",
 		"husky": "^8.0.3",
 		"lerna": "^6.6.1",
 		"lint-staged": "^13.2.1",
+		"prettier": "^2.8.7",
+		"prettier-plugin-packagejson": "^2.4.3",
 		"rimraf": "^4.4.1",
 		"ts-node": "^10.9.1"
 	},

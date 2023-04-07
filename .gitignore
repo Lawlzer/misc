@@ -1,7 +1,32 @@
-/node_modules
-/temp
+# Dependencies
+node_modules
 
-/dist
-/tsconfig.tsbuildinfo
+# Logs
+logs
 
-/todo
+
+# Temporary caches
+*.tsbuildinfo
+data
+target
+
+# Environment variables/secrets
+.env
+.env.development
+.env.production
+.env.test
+
+# Build / Generated output
+dist
+routeTypes
+
+# Temporary/dev-test locations
+legacy
+temp
+personalTips
+personalTips.txt
+todo
+todo.txt
+
+# Specific to this project
+output

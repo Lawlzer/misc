@@ -2,15 +2,14 @@ import { throwError } from '@lawlzer/utils';
 import { ESLint } from 'eslint';
 import path from 'path';
 
-import { createESLintTestFileContent } from '../../test-utils/testUtils';
-import { eslintConfigMain } from '../index.js';
+import { createESLintTestFileContent } from '../../../../test-utils/testUtils';
 
-describe(`${path.resolve(__dirname, 'index.js')} is working as expected (Will lint everything)`, () => {
+describe(`eslint/typescript is working as expected (Will lint everything)`, () => {
 	const eslintInstance = new ESLint({
 		fix: true,
 		useEslintrc: false,
 		overrideConfig: {
-			extends: [...eslintConfigMain],
+			extends: [path.resolve(__dirname, 'index.js')],
 		},
 		// overrideConfigFile: eslintFilePath,
 	});
@@ -24,19 +23,15 @@ describe(`${path.resolve(__dirname, 'index.js')} is working as expected (Will li
 
 	it('is an import-able file in JavaScript (the folder is import-able)', async () => {
 		expect(async () => {
-			await import('../index');
+			await import('./index');
 		}).not.toThrow();
 	});
 
-	it('will lint a JavaScript file', async () => {
+	it('will NOT lint a JavaScript file', async () => {
 		const initialText = await createESLintTestFileContent();
 		const results = await eslintInstance.lintText(initialText, { filePath: 'a.js' });
 		const resultText = results[0].output;
-		if (!resultText) throwError('ESLint did not return any text');
-
-		expect(resultText).not.toContain('var'); // Var should be changed to let
-		expect(resultText).toContain('let'); // Var should be changed to let]
-		expect(initialText).not.toBe(resultText); // The text should be different
+		expect(resultText).toBe(undefined);
 	});
 
 	it('will lint a TypeScript file', async () => {
