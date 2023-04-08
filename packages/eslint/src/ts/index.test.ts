@@ -2,7 +2,7 @@ import { throwError } from '@lawlzer/utils';
 import { ESLint } from 'eslint';
 import path from 'path';
 
-import { createESLintTestFileContent } from '../../../../test-utils/testUtils';
+import { createESLintTestFileContent } from '../../../../test-utils/utils';
 
 describe(`eslint/typescript is working as expected (Will lint everything)`, () => {
 	const eslintInstance = new ESLint({

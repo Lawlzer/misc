@@ -1,5 +1,4 @@
 module.exports = {
-	// parser: '',
 	plugins: [
 		'@typescript-eslint',
 		'simple-import-sort', // eslint-plugin-simple-import-sort
@@ -55,4 +54,4 @@ module.exports = {
 			},
 		},
 	],
-};
+}

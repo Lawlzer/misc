@@ -9,6 +9,7 @@ logs
 *.tsbuildinfo
 data
 target
+lerna-debug.log
 
 # Environment variables/secrets
 .env
@@ -19,6 +20,7 @@ target
 # Build / Generated output
 dist
 routeTypes
+
 
 # Temporary/dev-test locations
 legacy
