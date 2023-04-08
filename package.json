@@ -1,5 +1,5 @@
 {
-	"name": "@lawlzer/config",
+	"name": "@lawlzer/misc",
 	"version": "0.0.1",
 	"description": "A collection of configuration files, used to reduce clutter/shared configurations between projects.",
 	"license": "ISC",
