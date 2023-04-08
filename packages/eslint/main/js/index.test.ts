@@ -4,7 +4,7 @@ import path from 'path';
 
 import { createESLintTestFileContent } from '../../../../test-utils/utils';
 
-describe(`eslint/typescript is working as expected (Will lint everything)`, () => {
+describe(`eslint/js is working as expected (Will lint JS files)`, () => {
 	const eslintInstance = new ESLint({
 		fix: true,
 		useEslintrc: false,
@@ -27,21 +27,20 @@ describe(`eslint/typescript is working as expected (Will lint everything)`, () =
 		}).not.toThrow();
 	});
 
-	it('will NOT lint a JavaScript file', async () => {
+	it('will lint a JavaScript file', async () => {
 		const initialText = await createESLintTestFileContent();
 		const results = await eslintInstance.lintText(initialText, { filePath: 'a.js' });
 		const resultText = results[0].output;
-		expect(resultText).toBe(undefined);
+
+		expect(resultText).not.toContain('var'); // Var should be changed to let
+		expect(resultText).toContain('let'); // Var should be changed to let
+		expect(initialText).not.toBe(resultText); // The text should be different
 	});
 
-	it('will lint a TypeScript file', async () => {
+	it('will NOT lint a TypeScript file', async () => {
 		const initialText = await createESLintTestFileContent();
 		const results = await eslintInstance.lintText(initialText, { filePath: 'a.ts' });
 		const resultText = results[0].output;
-		if (!resultText) throwError('ESLint did not return any text');
-
-		expect(resultText).not.toContain('var'); // Var should be changed to let
-		expect(resultText).toContain('let'); // Var should be changed to let]
-		expect(initialText).not.toBe(resultText); // The text should be different
+		expect(resultText).toBe(undefined);
 	});
 });

@@ -1,6 +1,5 @@
 module.exports = {
 	plugins: [
-		'@typescript-eslint',
 		'simple-import-sort', // eslint-plugin-simple-import-sort
 		'import', // eslint-plugin-import
 		'unused-imports', // eslint-plugin-unused-imports
@@ -54,4 +53,4 @@ module.exports = {
 			},
 		},
 	],
-}
+};

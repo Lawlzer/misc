@@ -1,6 +1,7 @@
-import { promisify } from 'util';
-import { ExecOptions, exec as execOriginal } from 'child_process';
 import { throwError } from '@lawlzer/utils';
+import type { ExecOptions } from 'child_process';
+import { exec as execOriginal } from 'child_process';
+import { promisify } from 'util';
 
 const asyncExec = promisify(execOriginal);
 

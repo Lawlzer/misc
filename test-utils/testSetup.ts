@@ -1,12 +1,11 @@
 // Jest does not allow us to use dotenv, mongoose, or app.listen() in tests -- However, on Jest initialization, it's fine.
 // So, we must run initialization code (dotenv, mongoose, app.listen()) here.  Then, for Jest supertests, we can simply import run_server.ts :)
+import path from 'path';
 
-// NODE_ENV must be set to production or development (or test, but this file shouldn't be ran with Jest)
-// export async function beforeAll(() {
-// 	console.log('beforeAll called!');
-// });
+import { exec } from './utils';
 
 export default async function () {
+	// await exec('npm run build', { cwd: path.resolve(__dirname, '..') }); // Some tests require dist files to be built
 	return true;
 }
 

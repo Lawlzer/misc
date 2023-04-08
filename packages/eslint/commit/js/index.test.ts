@@ -1,4 +1,3 @@
-import { throwError } from '@lawlzer/utils';
 import { ESLint } from 'eslint';
 import path from 'path';
 
@@ -31,12 +30,12 @@ describe(`eslint/js is working as expected (Will lint JS files)`, () => {
 		const initialText = await createESLintTestFileContent();
 		const results = await eslintInstance.lintText(initialText, { filePath: 'a.js' });
 		const resultText = results[0].output;
-	
-		expect(resultText).not.toContain('var'); // Var should be changed to let
-		expect(resultText).toContain('let'); // Var should be changed to let]
+
+		expect(resultText).not.toContain('var'); // Var should be changed to const
+		expect(resultText).toContain('const'); // Var should be changed to const (as it's not reassigned, and this is the onCommit version)
 		expect(initialText).not.toBe(resultText); // The text should be different
 	});
-	
+
 	it('will NOT lint a TypeScript file', async () => {
 		const initialText = await createESLintTestFileContent();
 		const results = await eslintInstance.lintText(initialText, { filePath: 'a.ts' });
