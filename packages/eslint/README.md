@@ -1,12 +1,33 @@
-npm link C:/code/npm/config/packages/eslint
-npm i @lawlzer/config
-npm i -D eslint
+# Using @lawlzer/eslint
 
+### Install @lawlzer/eslint and eslint as development dependencies:
+```
+npm i -D @lawlzer/eslint eslint
+```
+
+### Add the following code to a `.eslintrc.js`
+```
+// .eslintrc.js
 const path = require('path');
+
 module.exports = {
-extends: [path.resolve(process.cwd(), 'node_modules', '@lawlzer', 'eslint', 'main', 'index.js')],
+  // @lawlzer/eslint
+  extends: [path.resolve(process.cwd(), 'node_modules', '@lawlzer', 'eslint', 'main')],
 };
+```
 
-var example = 'hey! :)';
+If you'd like to use an on-commit ESLint file (`.eslintrc.commit.js`, along with an on-commit hook), there is also `@lawlzer/eslint/commit`)
 
-ESLint must be installed separately
+Example:
+```
+// .eslintrc.js
+const path = require('path');
+
+module.exports = {
+  // @lawlzer/eslint
+  extends: [path.resolve(process.cwd(), 'node_modules', '@lawlzer', 'eslint', 'commit')],
+};
+```
+
+
+Alternatively, if you would only like JS or TS configuration, there is `@lawlzer/eslint/main/js` (and the similar variants)

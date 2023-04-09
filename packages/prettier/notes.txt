@@ -1,0 +1,1 @@
+Maybe Prettier should be a peerDependency? That way the client can choose the version of prettier?

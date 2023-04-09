@@ -1,13 +1,17 @@
-npm link C:/code/npm/config/packages/eslint
-npm i @lawlzer/config
-npm i -D eslint
+# Using @lawlzer/prettier
 
-const path = require('path');
+### Install @lawlzer/prettier as a development dependency:
+```
+npm i -D @lawlzer/prettier
+```
 
+
+### Add the following code to a `.prettierrc.js`
+```
+// .prettierrc.js
 module.exports = {
-// ...require('@lawlzer/prettier')
-...require(path.resolve(\_\_dirname, '..', 'node_modules', '@lawlzer', 'prettier', 'index.js')),
+	...require('@lawlzer/prettier'),
 };
+```
 
-Maybe needs Prettier installed
-(if yes, move to peerDependency)
+This package automatically installs Prettier (it is not a necessary dependency)

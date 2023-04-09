@@ -1,13 +1,12 @@
 {
 	"name": "@lawlzer/eslint",
 	"version": "0.0.1",
-	"main": "./dist/index.js",
 	"files": [
-		"src",
-		"dist"
+		"commit",
+		"main"
 	],
 	"scripts": {
-		"build": "rimraf ./dist",
+		"build": "",
 		"test": "jest --config ../../config/jest.config.ts"
 	},
 	"dependencies": {
