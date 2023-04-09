@@ -34,7 +34,7 @@ export async function exec(command: string, options?: ExecOptions) {
 /**
  * Create a test file for ESLint
  */
-export async function createESLintTestFileContent(): Promise<string> {
+export async function createLintableTestFileContent(): Promise<string> {
 	const testCode = `
   		var thisWillBeChanged = 1;
 	`;

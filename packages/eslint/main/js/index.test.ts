@@ -1,10 +1,13 @@
-import { throwError } from '@lawlzer/utils';
+import { ensureDirectoryExists, getRandomCharacters, throwError } from '@lawlzer/utils';
 import { ESLint } from 'eslint';
+import fs from 'fs-extra';
+import ms from 'ms';
 import path from 'path';
+import rimraf from 'rimraf';
 
-import { createESLintTestFileContent } from '../../../../test-utils/utils';
+import { createLintableTestFileContent, exec, getModifiedEnvPath } from '../../../../test-utils/utils';
 
-describe(`eslint/js is working as expected (Will lint JS files)`, () => {
+describe(`eslint/main/js`, () => {
 	const eslintInstance = new ESLint({
 		fix: true,
 		useEslintrc: false,
@@ -28,7 +31,7 @@ describe(`eslint/js is working as expected (Will lint JS files)`, () => {
 	});
 
 	it('will lint a JavaScript file', async () => {
-		const initialText = await createESLintTestFileContent();
+		const initialText = await createLintableTestFileContent();
 		const results = await eslintInstance.lintText(initialText, { filePath: 'a.js' });
 		const resultText = results[0].output;
 
@@ -38,9 +41,53 @@ describe(`eslint/js is working as expected (Will lint JS files)`, () => {
 	});
 
 	it('will NOT lint a TypeScript file', async () => {
-		const initialText = await createESLintTestFileContent();
+		const initialText = await createLintableTestFileContent();
 		const results = await eslintInstance.lintText(initialText, { filePath: 'a.ts' });
 		const resultText = results[0].output;
 		expect(resultText).toBe(undefined);
 	});
+
+	// // Temporarily disabled, because they share an NPM lock file -> they break when ran at the same time.
+	// it(
+	// 	'will import the file with zero node_modules',
+	// 	async () => {
+	// 		const tempFolderPath = path.join(process.cwd(), 'temp', 'test', 'eslint', 'main', 'js');
+
+	// 		await ensureDirectoryExists(tempFolderPath);
+
+	// 		const eslintFilePath = path.join(tempFolderPath, '.eslintrc.js');
+
+	// 		const fileToLintPath = path.join(tempFolderPath, 'fileToLint.js');
+
+	// 		const eslintConfigText = `
+	// 		module.exports = {
+	// 			extends: ['./node_modules/@lawlzer/eslint/main/js/index.js'],
+	// 		  };
+	// `;
+	// 		await fs.writeFile(eslintFilePath, eslintConfigText);
+
+	// 		const fileContentInitial = await createLintableTestFileContent();
+	// 		await fs.writeFile(fileToLintPath, fileContentInitial);
+
+	// 		// The path to this repo/package (if we "npm i <here>",  it should work)
+	// 		const pathToThisPackage = path.resolve(__dirname, '..', '..');
+
+	// 		await exec(`npm init -y`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
+
+	// 		// Install this package
+	// 		await exec(`npm i ${pathToThisPackage}`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
+
+	// 		// I don't know why this is required, but we get the following error if we do not do this:
+	// 		// npm ERR! could not determine executable to run
+	// 		await exec(`npm i`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
+
+	// 		await exec(`npx --yes eslint . --fix`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
+
+	// 		const fileContentAfter = await fs.readFile(fileToLintPath, 'utf-8');
+	// 		expect(fileContentAfter).not.toBe(eslintConfigText);
+	// 		expect(fileContentAfter).not.toContain('var'); // Var -> Let
+	// 		expect(fileContentAfter).toContain('let'); // Var -> Let
+	// 	},
+	// 	ms('1m')
+	// );
 });

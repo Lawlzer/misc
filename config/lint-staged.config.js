@@ -8,6 +8,6 @@ module.exports = {
 
 		'npm run lint:prettier --',
 		'jest --bail --findRelatedTests --pass-with-no-tests --config=./config/jest.config.ts',
-		'git add .',
+		// 'git add .',
 	],
 };

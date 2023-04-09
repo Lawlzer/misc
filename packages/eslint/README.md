@@ -9,4 +9,4 @@ extends: [path.resolve(process.cwd(), 'node_modules', '@lawlzer', 'eslint', 'mai
 
 var example = 'hey! :)';
 
-Includes ESLint
+ESLint must be installed separately

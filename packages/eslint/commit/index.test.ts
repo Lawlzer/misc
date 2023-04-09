@@ -4,10 +4,11 @@ import fs from 'fs-extra';
 import ms from 'ms';
 import os from 'os';
 import path from 'path';
+import rimraf from 'rimraf';
 
-import { createESLintTestFileContent, exec, getModifiedEnvPath } from '../../../test-utils/utils';
+import { createLintableTestFileContent, exec, getModifiedEnvPath } from '../../../test-utils/utils';
 
-describe(`eslint/js is working as expected (Will lint TS files)`, () => {
+describe(`eslint/commit`, () => {
 	const eslintInstance = new ESLint({
 		fix: true,
 		useEslintrc: false,
@@ -31,7 +32,7 @@ describe(`eslint/js is working as expected (Will lint TS files)`, () => {
 	});
 
 	it('will lint a JavaScript file', async () => {
-		const initialText = await createESLintTestFileContent();
+		const initialText = await createLintableTestFileContent();
 		const results = await eslintInstance.lintText(initialText, { filePath: 'a.js' });
 		const resultText = results[0].output;
 
@@ -41,7 +42,7 @@ describe(`eslint/js is working as expected (Will lint TS files)`, () => {
 	});
 
 	it('will lint a TypeScript file', async () => {
-		const initialText = await createESLintTestFileContent();
+		const initialText = await createLintableTestFileContent();
 		const results = await eslintInstance.lintText(initialText, { filePath: 'a.ts' });
 		const resultText = results[0].output;
 
@@ -50,28 +51,31 @@ describe(`eslint/js is working as expected (Will lint TS files)`, () => {
 		expect(initialText).not.toBe(resultText); // The text should be different
 	});
 
-	// // For some reason, it's not fully installing the package -- the files are empty.
+	// // Temporarily disabled, because they share an NPM lock file -> they break when ran at the same time.
 	// it(
-	// 	'will successfully import the file with zero node_modules',
+	// 	'will import the file with zero node_modules',
 	// 	async () => {
-	// 		const tempFolderPath = path.join(os.tmpdir(), getRandomCharacters(25, { letters: true }));
+	// 		// If we use os.tmpdir(), on Windows it goes through AppData, which for some reason breaks npx
+	// 		const tempFolderPath = path.join(process.cwd(), 'temp', 'test', 'eslint', 'commit', 'shared');
+
 	// 		await ensureDirectoryExists(tempFolderPath);
 
 	// 		const eslintFilePath = path.join(tempFolderPath, '.eslintrc.js');
 
-	// 		const fileToLintPath = path.join(tempFolderPath, 'fileToLint.js');
+	// 		const fileToLintPath = path.join(tempFolderPath, 'fileToLint.ts');
 
 	// 		const eslintConfigText = `
-	// 		module.exports = {
-	// 			extends: ['./node_modules/@lawlzer/eslint/commit/index.js'],
-	// 		  };
-	// `;
+	// 			module.exports = {
+	// 				extends: ['./node_modules/@lawlzer/eslint/commit/index.js'],
+	// 				root: true,
+	// 			  };
+	// 	`;
 	// 		await fs.writeFile(eslintFilePath, eslintConfigText);
 
-	// 		const fileContentInitial = await createESLintTestFileContent();
+	// 		const fileContentInitial = await createLintableTestFileContent();
 	// 		await fs.writeFile(fileToLintPath, fileContentInitial);
 
-	// 		// The path to this file (if we "npm i <here>",  it should work)
+	// 		// The path to this repo/package (if we "npm i <here>",  it should work)
 	// 		const pathToThisPackage = path.resolve(__dirname, '..');
 
 	// 		await exec(`npm init -y`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
@@ -83,13 +87,13 @@ describe(`eslint/js is working as expected (Will lint TS files)`, () => {
 	// 		// npm ERR! could not determine executable to run
 	// 		await exec(`npm i`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
 
-	// 		await exec(`npx eslint . --fix`, { cwd: path.resolve(tempFolderPath) });
+	// 		await exec(`npx --yes eslint . --fix`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
 
 	// 		const fileContentAfter = await fs.readFile(fileToLintPath, 'utf-8');
 	// 		expect(fileContentAfter).not.toBe(eslintConfigText);
-	// 		expect(fileContentAfter).not.toContain('var'); // Var -> Const
-	// 		expect(fileContentAfter).toContain('const'); // Var -> Const
+	// 		expect(fileContentAfter).not.toContain('var'); // Var -> Let
+	// 		expect(fileContentAfter).toContain('let'); // Var -> Let
 	// 	},
-	// 	ms('30s')
+	// 	ms('1m')
 	// );
 });
