@@ -5,7 +5,7 @@ import ms from 'ms';
 import os from 'os';
 import path from 'path';
 
-import { createLintableTestFileContent, exec, getModifiedEnvPath } from '../../../test-utils/utils';
+import { createLintableTestFileContent, exec, getModifiedEnvPath, testESlintFreshInstall } from '../../../test-utils/utils';
 
 describe(`eslint/main`, () => {
 	const eslintInstance = new ESLint({
@@ -50,46 +50,14 @@ describe(`eslint/main`, () => {
 		expect(initialText).not.toBe(resultText); // The text should be different
 	});
 
-	// // Temporarily disabled, because they share an NPM lock file -> they break when ran at the same time.
-	// it(
-	// 	'will import the file with zero node_modules',
-	// 	async () => {
-	// 		const tempFolderPath = path.join(process.cwd(), 'temp', 'test', 'eslint', 'main', 'shared');
-	// 		await ensureDirectoryExists(tempFolderPath);
-
-	// 		const eslintFilePath = path.join(tempFolderPath, '.eslintrc.js');
-
-	// 		const fileToLintPath = path.join(tempFolderPath, 'fileToLint.js');
-
-	// 		const eslintConfigText = `
-	// 		module.exports = {
-	// 			extends: ['./node_modules/@lawlzer/eslint/main/index.js'],
-	// 		  };
-	// `;
-	// 		await fs.writeFile(eslintFilePath, eslintConfigText);
-
-	// 		const fileContentInitial = await createLintableTestFileContent();
-	// 		await fs.writeFile(fileToLintPath, fileContentInitial);
-
-	// 		// The path to this file (if we "npm i <here>",  it should work)
-	// 		const pathToThisPackage = path.resolve(__dirname, '..');
-
-	// 		await exec(`npm init -y`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
-
-	// 		// Install this package
-	// 		await exec(`npm i ${pathToThisPackage}`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
-
-	// 		// I don't know why this is required, but we get the following error if we do not do this:
-	// 		// npm ERR! could not determine executable to run
-	// 		await exec(`npm i`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
-
-	// 		await exec(`npx eslint . --fix`, { cwd: path.resolve(tempFolderPath) });
-
-	// 		const fileContentAfter = await fs.readFile(fileToLintPath, 'utf-8');
-	// 		expect(fileContentAfter).not.toBe(eslintConfigText);
-	// 		expect(fileContentAfter).not.toContain('var'); // Var -> Let
-	// 		expect(fileContentAfter).toContain('let'); // Var -> Let
-	// 	},
-	// 	ms('1m')
-	// );
+	it(
+		'will import the file with zero node_modules',
+		async () => {
+			await testESlintFreshInstall({
+				pathToLintingConfiguration: __dirname,
+				shouldLint: ['js', 'ts'],
+			});
+		},
+		ms('1m')
+	);
 });

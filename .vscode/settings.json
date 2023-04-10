@@ -1,13 +1,6 @@
 {
 	"files.eol": "\n", // End of Line (use LF, not CRLF)
-	"eslint.validate": [
-		"javascript",
-		"typescript",
-		"javascriptreact",
-		"typescriptreact",
-		"json",
-		"jsonc"
-	],
+	"eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact", "json", "jsonc"],
 	"editor.quickSuggestions": {
 		// Honestly, not 100% sure what this does
 		"strings": true

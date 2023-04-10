@@ -1,6 +1,6 @@
 {
 	"name": "@lawlzer/prettier",
-	"version": "0.0.2",
+	"version": "0.0.1",
 	"main": "./dist/index.js",
 	"files": [
 		"src",
@@ -28,5 +28,5 @@
 	"publishConfig": {
 		"@YOUR-USERNAME:registry": "https://npm.pkg.github.com"
 	},
-	"gitHead": "102a4e72e57625f83556f637788e0d2e40be2c9e"
+	"gitHead": "5d4ddf09ba5ed848ca71d1596bf1a9f9ceab67c8"
 }

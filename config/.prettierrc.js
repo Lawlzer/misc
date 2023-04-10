@@ -1,3 +1,4 @@
 const path = require('path');
 
-module.exports = require(path.resolve(process.cwd(), 'packages', 'prettier', 'index.js'));
+// Prettier uses a different process.cwd() than the terminal, so we have to use __dirname
+module.exports = require(path.resolve(__dirname, '..', 'packages', 'prettier', 'index.js'));

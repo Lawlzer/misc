@@ -6,7 +6,7 @@ import os from 'os';
 import path from 'path';
 import rimraf from 'rimraf';
 
-import { createLintableTestFileContent, exec, getModifiedEnvPath } from '../../../test-utils/utils';
+import { createLintableTestFileContent, exec, getModifiedEnvPath, testESlintFreshInstall } from '../../../test-utils/utils';
 
 describe(`eslint/commit`, () => {
 	const eslintInstance = new ESLint({
@@ -51,49 +51,14 @@ describe(`eslint/commit`, () => {
 		expect(initialText).not.toBe(resultText); // The text should be different
 	});
 
-	// // Temporarily disabled, because they share an NPM lock file -> they break when ran at the same time.
-	// it(
-	// 	'will import the file with zero node_modules',
-	// 	async () => {
-	// 		// If we use os.tmpdir(), on Windows it goes through AppData, which for some reason breaks npx
-	// 		const tempFolderPath = path.join(process.cwd(), 'temp', 'test', 'eslint', 'commit', 'shared');
-
-	// 		await ensureDirectoryExists(tempFolderPath);
-
-	// 		const eslintFilePath = path.join(tempFolderPath, '.eslintrc.js');
-
-	// 		const fileToLintPath = path.join(tempFolderPath, 'fileToLint.ts');
-
-	// 		const eslintConfigText = `
-	// 			module.exports = {
-	// 				extends: ['./node_modules/@lawlzer/eslint/commit/index.js'],
-	// 				root: true,
-	// 			  };
-	// 	`;
-	// 		await fs.writeFile(eslintFilePath, eslintConfigText);
-
-	// 		const fileContentInitial = await createLintableTestFileContent();
-	// 		await fs.writeFile(fileToLintPath, fileContentInitial);
-
-	// 		// The path to this repo/package (if we "npm i <here>",  it should work)
-	// 		const pathToThisPackage = path.resolve(__dirname, '..');
-
-	// 		await exec(`npm init -y`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
-
-	// 		// Install this package
-	// 		await exec(`npm i ${pathToThisPackage}`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
-
-	// 		// I don't know why this is required, but we get the following error if we do not do this:
-	// 		// npm ERR! could not determine executable to run
-	// 		await exec(`npm i`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
-
-	// 		await exec(`npx --yes eslint . --fix`, { cwd: path.resolve(tempFolderPath), env: { path: getModifiedEnvPath() } });
-
-	// 		const fileContentAfter = await fs.readFile(fileToLintPath, 'utf-8');
-	// 		expect(fileContentAfter).not.toBe(eslintConfigText);
-	// 		expect(fileContentAfter).not.toContain('var'); // Var -> Let
-	// 		expect(fileContentAfter).toContain('let'); // Var -> Let
-	// 	},
-	// 	ms('1m')
-	// );
+	it(
+		'will import the file with zero node_modules',
+		async () => {
+			await testESlintFreshInstall({
+				pathToLintingConfiguration: __dirname,
+				shouldLint: ['js', 'ts'],
+			});
+		},
+		ms('1m')
+	);
 });
