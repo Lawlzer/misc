@@ -5,7 +5,11 @@ import ms from 'ms';
 import path from 'path';
 import rimraf from 'rimraf';
 
-import { createLintableTestFileContent, exec, getModifiedEnvPath } from '../../../../test-utils/utils';
+import {
+	createLintableTestFileContent,
+	exec,
+	getModifiedEnvPath,
+} from '../../../../test-utils/utils';
 
 describe(`eslint/commit/js`, () => {
 	const eslintInstance = new ESLint({

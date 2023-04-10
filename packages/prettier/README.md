@@ -1,12 +1,13 @@
 # Using @lawlzer/prettier
 
 ### Install @lawlzer/prettier as a development dependency:
+
 ```
 npm i -D @lawlzer/prettier
 ```
 
-
 ### Add the following code to a `.prettierrc.js`
+
 ```
 // .prettierrc.js
 module.exports = {

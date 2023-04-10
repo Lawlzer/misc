@@ -13,7 +13,10 @@ describe(`Prettier`, () => {
 	it('will lint a JavaScript file', async () => {
 		const initialText = await createLintableTestFileContent();
 
-		const formatted = prettier.format(initialText, { filepath: 'a.js', ...(prettierConfig as prettier.Options) });
+		const formatted = prettier.format(initialText, {
+			filepath: 'a.js',
+			...(prettierConfig as prettier.Options),
+		});
 
 		expect(initialText).not.toBe(formatted); // The text should be different
 	});
@@ -21,7 +24,10 @@ describe(`Prettier`, () => {
 	it('will lint a TypeScript file', async () => {
 		const initialText = await createLintableTestFileContent();
 
-		const formatted = prettier.format(initialText, { filepath: 'a.ts', ...(prettierConfig as prettier.Options) });
+		const formatted = prettier.format(initialText, {
+			filepath: 'a.ts',
+			...(prettierConfig as prettier.Options),
+		});
 
 		expect(initialText).not.toBe(formatted); // The text should be different
 	});
