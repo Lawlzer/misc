@@ -1,7 +1,7 @@
 {
 	"name": "@lawlzer/prettier",
 	"version": "0.0.1",
-	"main": "./dist/index.js",
+	"main": "./index.js",
 	"files": [
 		"src",
 		"dist"
