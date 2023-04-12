@@ -1,6 +1,9 @@
 {
 	"name": "@lawlzer/eslint",
 	"version": "0.0.2",
+	"description": "A highly customized ESLint configuration.",
+	"license": "ISC",
+	"author": "Lawlzer",
 	"files": [
 		"commit",
 		"main"
