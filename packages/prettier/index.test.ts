@@ -6,30 +6,30 @@ import os from 'os';
 import path from 'path';
 import prettier from 'prettier';
 
-import { createLintableTestFileContent, exec, getModifiedEnvPath } from '../../test-utils/utils';
+import { exec, getModifiedEnvPath } from '../../test-utils/utils';
 import * as prettierConfig from './index';
+
+const prettierTestFileContent = `
+  let a = 'hello world'; 
+`;
 
 describe(`Prettier`, () => {
 	it('will lint a JavaScript file', async () => {
-		const initialText = await createLintableTestFileContent();
-
-		const formatted = prettier.format(initialText, {
-			filepath: 'a.js',
+		const formatted = prettier.format(prettierTestFileContent, {
+			filepath: 'file1.js',
 			...(prettierConfig as prettier.Options),
 		});
 
-		expect(initialText).not.toBe(formatted); // The text should be different
+		expect(prettierTestFileContent).not.toBe(formatted); // The text should be different
 	});
 
 	it('will lint a TypeScript file', async () => {
-		const initialText = await createLintableTestFileContent();
-
-		const formatted = prettier.format(initialText, {
-			filepath: 'a.ts',
+		const formatted = prettier.format(prettierTestFileContent, {
+			filepath: 'file2.ts',
 			...(prettierConfig as prettier.Options),
 		});
 
-		expect(initialText).not.toBe(formatted); // The text should be different
+		expect(prettierTestFileContent).not.toBe(formatted); // The text should be different
 	});
 
 	// // For some reason, it's not fully installing the package -- the files are empty.

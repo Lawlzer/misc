@@ -10,9 +10,6 @@ module.exports = {
 		ecmaVersion: 2023,
 		sourceType: 'module',
 		ecmaFeatures: {},
-		// // Project is disabled because it's EXTREMELY slow. It has a lot of nice features, but sadly it's too slow.
-		// project: ['../tsconfig.json', '../src/**/*.ts', '../test-utils/**/*.ts'],
-		extraFileExtensions: ['.json'],
 	},
 
 	env: {

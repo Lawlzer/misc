@@ -1,4 +1,4 @@
-// This is a workaround for https://github.com/eslint/eslint/issues/3458
+// This package is a workaround for https://github.com/eslint/eslint/issues/3458
 require('@rushstack/eslint-config/patch/modern-module-resolution');
 
 const path = require('path');

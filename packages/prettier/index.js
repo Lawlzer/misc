@@ -10,5 +10,8 @@ module.exports = {
 	arrowParens: 'always',
 	endOfLine: 'lf',
 	singleAttributePerLine: false,
-	plugins: [require('prettier-plugin-packagejson')],
+	plugins: [
+		// @ts-expect-error This package does not have types
+		require('prettier-plugin-packagejson'),
+	],
 };
