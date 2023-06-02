@@ -378,8 +378,8 @@ module.exports = ({ commit }) => {
 		// This does not work with z.infer<> from Zod
 		'@typescript-eslint/no-type-alias': ['off'],
 
-		// Don't allow unnecessary if statements (We use these a lot, e.g @lawlzer/utils, so this may be revisited)
-		'@typescript-eslint/no-unnecessary-condition': ['error'],
+		// Don't allow unnecessary if statements (We use these a lot to be 100% certain, so this is disabled)
+		'@typescript-eslint/no-unnecessary-condition': ['off'],
 
 		// In class constructors, readonly/private/protected/public in parameters
 		'@typescript-eslint/parameter-properties': ['error'],
