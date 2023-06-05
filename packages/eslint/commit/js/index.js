@@ -22,7 +22,7 @@ module.exports = {
 	settings: {},
 	overrides: [
 		{
-			files: ['**/*.ts'],
+			files: ['**/*.js'],
 
 			rules: {
 				...rules,
