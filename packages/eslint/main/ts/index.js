@@ -3,10 +3,10 @@ const rules = require('../../rules/typescript')({ commit: false });
 module.exports = {
 	parser: '@typescript-eslint/parser',
 	plugins: [
-		'@typescript-eslint',
-		'simple-import-sort', // eslint-plugin-simple-import-sort
-		'import', // eslint-plugin-import
-		'unused-imports', // eslint-plugin-unused-imports
+		'@typescript-eslint', //
+		'eslint-plugin-simple-import-sort',
+		'eslint-plugin-import',
+		'eslint-plugin-unused-imports',
 	],
 
 	parserOptions: {

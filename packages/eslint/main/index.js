@@ -4,5 +4,9 @@ require('@rushstack/eslint-config/patch/modern-module-resolution');
 const path = require('path');
 
 module.exports = {
-	extends: [path.resolve(__dirname, 'js', 'index.js'), path.resolve(__dirname, 'ts', 'index.js')],
+	extends: [
+		path.resolve(__dirname, 'js', 'index.js'), //
+		path.resolve(__dirname, 'ts', 'index.js'),
+		path.resolve(__dirname, '..', 'misc', 'jest', 'index.js'),
+	],
 };

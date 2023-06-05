@@ -1,9 +1,9 @@
 # Using @lawlzer/eslint
 
-### Install @lawlzer/eslint and eslint as development dependencies:
+### Install @lawlzer/eslint, eslint, and @typescript-eslint/eslint-plugin as development dependencies:
 
 ```
-npm i -D @lawlzer/eslint eslint
+npm i -D @lawlzer/eslint eslint @typescript-eslint/eslint-plugin
 ```
 
 ### Add the following code to a `.eslintrc.js`

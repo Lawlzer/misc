@@ -12,11 +12,8 @@ module.exports = ({ commit }) => {
 		strict: 2,
 
 		// Disallow all "var" usage
-		'no-var': 'error',
+		'no-var': commit ? 'error' : 'off',
 		// '@typescript/no-var': 'error', // Not a rule
-
-		'simple-import-sort/imports': 'error',
-		'simple-import-sort/exports': 'error',
 
 		// Do not allow variables and types to share <the exact same> name
 		'@typescript-eslint/no-redeclare': ['error'],
@@ -454,5 +451,15 @@ module.exports = ({ commit }) => {
 
 		// 'import/no-unresolved': ['error', ],
 		// Very slow: https://github.com/import-js/eslint-plugin-import/issues/2348
+
+		// - - - - - - - - - - Package-based rules - - - - - - - - - -
+		// - - - - - - - - - - Package-based rules - - - - - - - - - -
+		// - - - - - - - - - - Package-based rules - - - - - - - - - -
+
+		'unused-imports/no-unused-imports': 'error',
+		// 'unused-imports/no-unused-vars': ['warn', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
+
+		'simple-import-sort/imports': 'error',
+		'simple-import-sort/exports': 'error',
 	};
 };
