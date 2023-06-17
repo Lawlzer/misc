@@ -202,7 +202,7 @@ module.exports = ({ commit }) => {
 		// Calling console.log() on an object calls object.toString().
 		// This errors if we call console.log() on an object that does not have a toString() method. (which returns [object Object])
 		'@typescript-eslint/no-base-to-string': ['error'],
-		'@typescript-eslint/restrict-template-expressions': ['error'], // Seems to be same as above, but for template literals
+		'@typescript-eslint/restrict-template-expressions': ['error', { allowAny: true, allowNumber: true, allowBoolean: true, allowNullish: true }], // Seems to be same as above, but for template literals
 
 		// Classes with two+ of the same name (two getters name "foo")
 		'@typescript-eslint/no-dupe-class-members': ['error'],
