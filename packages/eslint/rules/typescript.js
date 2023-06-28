@@ -95,9 +95,6 @@ module.exports = ({ commit }) => {
 		// No using functions without code inside them -- Simply unnecessary and annoying.
 		'@typescript-eslint/no-empty-function': commit ? ['error'] : ['off'],
 
-		// Disallow unused variables -- Very annoying
-		'@typescript-eslint/no-unused-vars': commit ? ['error'] : ['off'],
-
 		'@typescript-eslint/no-var-requires': commit ? ['error'] : ['off'],
 
 		//. @ts-expect-error -- If we want to ignore an ESLint error, we have a reason for it.
@@ -340,6 +337,9 @@ module.exports = ({ commit }) => {
 		// - - - - - - - - - - Experimental (should be revisited in the future, likely to change) - - - - - - - - - -
 		// - - - - - - - - - - Experimental (should be revisited in the future, likely to change) - - - - - - - - - -
 		// - - - - - - - - - - Experimental (should be revisited in the future, likely to change) - - - - - - - - - -
+
+		// Disallow unused variables -- Experimental. This is very annoying when coupled with generics, but we have args: none, which may solve it.
+		'@typescript-eslint/no-unused-vars': ['error', { vars: 'all', args: 'none', ignoreRestSiblings: false }],
 
 		// lol
 		// "0" is not camelcase (needed in NonEmptyArray<T>)
