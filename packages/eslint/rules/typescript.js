@@ -456,7 +456,7 @@ module.exports = ({ commit }) => {
 		// - - - - - - - - - - Package-based rules - - - - - - - - - -
 		// - - - - - - - - - - Package-based rules - - - - - - - - - -
 
-		'unused-imports/no-unused-imports': 'error',
+		// 'unused-imports/no-unused-imports': 'error', // TEMPORARILY DISABLED due to being outdated!
 		// 'unused-imports/no-unused-vars': ['warn', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
 
 		'simple-import-sort/imports': 'error',

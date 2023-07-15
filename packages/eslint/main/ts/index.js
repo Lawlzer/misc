@@ -6,7 +6,7 @@ module.exports = {
 		'@typescript-eslint', //
 		'eslint-plugin-simple-import-sort',
 		'eslint-plugin-import',
-		'eslint-plugin-unused-imports',
+		// 'eslint-plugin-unused-imports', // TEMPORARILY DISABLED due to being outdated!
 	],
 
 	parserOptions: {
