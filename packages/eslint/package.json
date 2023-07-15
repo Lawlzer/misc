@@ -1,6 +1,6 @@
 {
 	"name": "@lawlzer/eslint",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"description": "A highly customized ESLint configuration.",
 	"license": "ISC",
 	"author": "Lawlzer",
@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"@rushstack/eslint-config": "^3.3.2",
-		"@typescript-eslint/parser": "^6.0.0",
+		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"eslint-plugin-import": "^2.27.5",
 		"eslint-plugin-simple-import-sort": "^10.0.0"
 	},
@@ -34,8 +34,8 @@
 		"rimraf": "^5.0.1"
 	},
 	"peerDependencies": {
-		"@typescript-eslint/eslint-plugin": "^5.59.1",
-		"eslint": "^8.37.0"
+		"@typescript-eslint/parser": "^6.0.0",
+		"eslint": "^8.45.0"
 	},
 	"publishConfig": {
 		"@YOUR-USERNAME:registry": "https://npm.pkg.github.com"
