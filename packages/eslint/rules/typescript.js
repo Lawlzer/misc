@@ -338,9 +338,6 @@ module.exports = ({ commit }) => {
 		// - - - - - - - - - - Experimental (should be revisited in the future, likely to change) - - - - - - - - - -
 		// - - - - - - - - - - Experimental (should be revisited in the future, likely to change) - - - - - - - - - -
 
-		// Disallow unused variables -- Experimental. This is very annoying when coupled with generics, but we have args: none, which may solve it.
-		'@typescript-eslint/no-unused-vars': ['error', { vars: 'all', args: 'none', ignoreRestSiblings: false }],
-
 		// lol
 		// "0" is not camelcase (needed in NonEmptyArray<T>)
 		'@typescript-eslint/naming-convention': ['off'],
@@ -456,8 +453,12 @@ module.exports = ({ commit }) => {
 		// - - - - - - - - - - Package-based rules - - - - - - - - - -
 		// - - - - - - - - - - Package-based rules - - - - - - - - - -
 
-		// 'unused-imports/no-unused-imports': 'error',
-		'unused-imports/no-unused-vars': ['warn', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
+		// no-unused-vars must be off, as these do that rule but better (with autofixing)
+		'no-unused-vars': 'off',
+		'unused-imports/no-unused-imports': 'error',
+		'unused-imports/no-unused-vars': ['error', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
+		'@typescript-eslint/no-unused-vars': ['off'], // I'm not sure if this rule has to be off as well.
+		// '@typescript-eslint/no-unused-vars': ['error', { vars: 'all', args: 'none', ignoreRestSiblings: false }],
 
 		'simple-import-sort/imports': 'error',
 		'simple-import-sort/exports': 'error',
