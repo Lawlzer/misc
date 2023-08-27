@@ -453,13 +453,15 @@ module.exports = ({ commit }) => {
 		// - - - - - - - - - - Package-based rules - - - - - - - - - -
 		// - - - - - - - - - - Package-based rules - - - - - - - - - -
 
+		// no-unused-vars stuff
 		// no-unused-vars must be off, as these do that rule but better (with autofixing)
 		'no-unused-vars': 'off',
-		'unused-imports/no-unused-imports': 'error',
-		'unused-imports/no-unused-vars': ['error', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
-		'@typescript-eslint/no-unused-vars': ['off'], // I'm not sure if this rule has to be off as well.
+		'@typescript-eslint/no-unused-vars': ['off'], // I'm not sure if this rule has to be off as well, but we will leave it off to be safe.
+		'unused-imports/no-unused-imports': commit ? 'error' : false,
+		'unused-imports/no-unused-vars': commit ? ['error', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }] : false,
 		// '@typescript-eslint/no-unused-vars': ['error', { vars: 'all', args: 'none', ignoreRestSiblings: false }],
 
+		// Import stuff
 		'simple-import-sort/imports': 'error',
 		'simple-import-sort/exports': 'error',
 	};
