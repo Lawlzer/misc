@@ -1,12 +1,5 @@
-import { ensureDirectoryExists, getRandomCharacters } from '@lawlzer/utils';
-import { ESLint } from 'eslint';
-import fs from 'fs-extra';
-import ms from 'ms';
-import os from 'os';
-import path from 'path';
 import prettier from 'prettier';
 
-import { exec, getModifiedEnvPath } from '../../test-utils/utils';
 import * as prettierConfig from './index';
 
 const prettierTestFileContent = `
@@ -18,7 +11,7 @@ describe(`Prettier`, () => {
 		const formatted = prettier.format(prettierTestFileContent, {
 			filepath: 'file1.js',
 			...(prettierConfig as prettier.Options),
-		});
+		})
 
 		expect(prettierTestFileContent).not.toBe(formatted); // The text should be different
 	});

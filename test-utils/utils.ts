@@ -1,4 +1,4 @@
-import { ensureDirectoryExists, getRandomCharacters, throwError } from '@lawlzer/utils';
+import { throwError } from '@lawlzer/utils';
 import type { ExecOptions } from 'child_process';
 import { exec as execOriginal } from 'child_process';
 import { ESLint } from 'eslint';
@@ -99,9 +99,6 @@ export async function quickESLintTest({ pathToESLintConfiguration: pathToESLintC
 		fix: true,
 		useEslintrc: false,
 		overrideConfigFile: pathToESLintConfig,
-		// overrideConfig: {
-		// 	extends: [pathToESLintConfig],
-		// },
 	});
 
 	const testInformation = lintableFileTypes.find((lintableFile) => lintableFile.extension === extensionType);

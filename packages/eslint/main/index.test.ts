@@ -1,10 +1,10 @@
 import { ensureDirectoryExists, getRandomCharacters } from '@lawlzer/utils';
-import { ESLint } from 'eslint';
 import fs from 'fs-extra';
 import ms from 'ms';
-import os from 'os';
 import path from 'path';
 
+// import type { LintableFileExtensions } from '../../../test-utils/utils';
+// import { exec, findPackageJson, getModifiedEnvPath, lintableFileTypes, quickESLintTest } from '../../../test-utils/utils';
 import type { LintableFileExtensions } from '../../../test-utils/utils';
 import { exec, findPackageJson, getModifiedEnvPath, lintableFileTypes, quickESLintTest } from '../../../test-utils/utils';
 
@@ -58,23 +58,23 @@ describe(`eslint/main`, () => {
 					`;
 			await fs.writeFile(path.join(tempFolderPath, '.eslintrc.js'), eslintConfigText);
 
-			const npmInitResult = await exec(`npm init -y`, {
+			void (await exec(`npm init -y`, {
 				cwd: path.resolve(tempFolderPath),
 				env: { path: getModifiedEnvPath() },
-			});
+			}));
 
 			// Install this package
-			const npmIPackageResult = await exec(`npm i --no-package-lock ${pathToPackage}`, {
+			void (await exec(`npm i --no-package-lock ${pathToPackage}`, {
 				cwd: path.resolve(tempFolderPath),
 				env: { path: getModifiedEnvPath() },
-			});
+			}));
 
-			// I don't know why this is required, but we get the following error if we do not do this:
+			// We get the following error if we do not do this:
 			// npm ERR! could not determine executable to run
-			const npmIResult = await exec(`npm i --no-package-lock`, {
+			void (await exec(`npm i --no-package-lock`, {
 				cwd: path.resolve(tempFolderPath),
 				env: { path: getModifiedEnvPath() },
-			});
+			}));
 
 			const shouldLint = lintableFileTypes.filter((x) => {
 				return extensionsShouldWork.includes(x.extension);
@@ -84,13 +84,18 @@ describe(`eslint/main`, () => {
 				const fileToLintPath = path.join(tempFolderPath, `fileToLint.${testData.extension}`);
 				await fs.writeFile(fileToLintPath, testData.fileContent);
 
-				// The command "fails", but it still lints, for one repo. I don't know why.
+				await exec(`npx tsc --init`);
+
+				console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaapath: ', path.resolve(tempFolderPath));
+
+				// Sometimes the command "fails", but it still lints.
 				try {
 					await exec(`npx --yes eslint . --fix`, {
 						cwd: path.resolve(tempFolderPath),
 						env: { path: getModifiedEnvPath() },
 					});
 				} catch (e) {}
+				console.log('path: ', path.resolve(tempFolderPath));
 
 				const fileContentAfter = await fs.readFile(fileToLintPath, 'utf-8');
 				await testData.test(fileContentAfter);

@@ -1,12 +1,7 @@
-import { ensureDirectoryExists, getRandomCharacters, throwError } from '@lawlzer/utils';
-import { ESLint } from 'eslint';
-import fs from 'fs-extra';
-import ms from 'ms';
 import path from 'path';
-import rimraf from 'rimraf';
 
 import type { LintableFileExtensions } from '../../../../test-utils/utils';
-import { exec, findPackageJson, getModifiedEnvPath, getOppositeLintableExtensions, quickESLintTest } from '../../../../test-utils/utils';
+import { getOppositeLintableExtensions, quickESLintTest } from '../../../../test-utils/utils';
 
 describe(`eslint/main/js`, () => {
 	// This is a test to ensure the execSync errors if it does not import a real file (this is a test to ensure the tests work)

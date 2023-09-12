@@ -204,13 +204,24 @@ module.exports = ({ commit }) => {
 		// Classes with two+ of the same name (two getters name "foo")
 		'@typescript-eslint/no-dupe-class-members': ['error'],
 
-		// Only one import per file
+		// Only one import per file -- the autofix for this does not seem to work
 		'import/no-duplicates': [
+			'off',
+			// 'error',
+			// {
+			// 	'prefer-inline': true,
+			// 	considerQueryString: true,
+			// },
+		],
+
+		'import/extensions': [
 			'error',
+			'never',
 			{
-				'prefer-inline': true,
-				considerQueryString: true,
-			},
+				pattern: { 
+					// 'json': 'always'
+				}
+			}
 		],
 
 		// Don't use for *in* loops on arrays, use for *of*
